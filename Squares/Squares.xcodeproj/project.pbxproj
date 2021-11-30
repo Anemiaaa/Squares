@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0470474D2754FDB00041CFB0 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0470474B2754FDB00041CFB0 /* LandingViewController.swift */; };
+		0470474E2754FDB00041CFB0 /* LandingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0470474C2754FDB00041CFB0 /* LandingViewController.xib */; };
+		04704750275507470041CFB0 /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0470474F275507470041CFB0 /* LandingView.swift */; };
+		0470475227552C650041CFB0 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0470475127552C650041CFB0 /* Extensions.swift */; };
 		0494AACF275039780077A0F8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0494AACE275039780077A0F8 /* AppDelegate.swift */; };
 		0494AAD1275039780077A0F8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0494AAD0275039780077A0F8 /* SceneDelegate.swift */; };
 		0494AAD82750397B0077A0F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0494AAD72750397B0077A0F8 /* Assets.xcassets */; };
@@ -14,6 +18,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0470474B2754FDB00041CFB0 /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
+		0470474C2754FDB00041CFB0 /* LandingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LandingViewController.xib; sourceTree = "<group>"; };
+		0470474F275507470041CFB0 /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
+		0470475127552C650041CFB0 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		0494AACB275039780077A0F8 /* Squares.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Squares.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0494AACE275039780077A0F8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0494AAD0275039780077A0F8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -36,15 +44,19 @@
 		047047442754F29C0041CFB0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0494AAD92750397B0077A0F8 /* LaunchScreen.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
 		};
-		047047452754F2B40041CFB0 /* Controller */ = {
+		0470474A2754FD980041CFB0 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				0470474B2754FDB00041CFB0 /* LandingViewController.swift */,
+				0470474C2754FDB00041CFB0 /* LandingViewController.xib */,
+				0470474F275507470041CFB0 /* LandingView.swift */,
 			);
-			path = Controller;
+			path = UI;
 			sourceTree = "<group>";
 		};
 		0494AAC2275039780077A0F8 = {
@@ -67,11 +79,11 @@
 		0494AACD275039780077A0F8 /* Squares */ = {
 			isa = PBXGroup;
 			children = (
-				047047452754F2B40041CFB0 /* Controller */,
+				0470474A2754FD980041CFB0 /* UI */,
 				047047442754F29C0041CFB0 /* View */,
 				0494AACE275039780077A0F8 /* AppDelegate.swift */,
 				0494AAD0275039780077A0F8 /* SceneDelegate.swift */,
-				0494AAD92750397B0077A0F8 /* LaunchScreen.storyboard */,
+				0470475127552C650041CFB0 /* Extensions.swift */,
 			);
 			path = Squares;
 			sourceTree = "<group>";
@@ -143,6 +155,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0470474E2754FDB00041CFB0 /* LandingViewController.xib in Resources */,
 				0494AADB2750397B0077A0F8 /* LaunchScreen.storyboard in Resources */,
 				0494AAD82750397B0077A0F8 /* Assets.xcassets in Resources */,
 			);
@@ -155,7 +168,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0470475227552C650041CFB0 /* Extensions.swift in Sources */,
+				04704750275507470041CFB0 /* LandingView.swift in Sources */,
 				0494AACF275039780077A0F8 /* AppDelegate.swift in Sources */,
+				0470474D2754FDB00041CFB0 /* LandingViewController.swift in Sources */,
 				0494AAD1275039780077A0F8 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -313,7 +329,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -340,7 +356,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
