@@ -6,6 +6,15 @@
 //
 
 import UIKit
+import RxSwift
+
+public enum States {
+    
+    case leftUpClick
+    case rightUpClick
+    case leftDownClick
+    case rightDownClick
+}
 
 class LandingView: UIView {
 
@@ -14,16 +23,17 @@ class LandingView: UIView {
     // MARK: -
     // MARK: Variables
     
-    //private(set) var squarePosition: Positions = Positions.leftUp
+    public var viewStatesHandler = PublishSubject<States>()
+    
+    private let rect: CGRect
     
     // MARK: -
     // MARK: Initialization
     
     public init(rect: CGRect) {
-        super.init(frame: UIScreen.main.bounds)
+        self.rect = rect
         
-        self.square.frame = rect
-        self.square.backgroundColor = UIColor.cyan
+        super.init(frame: UIScreen.main.bounds)
     }
     
     required init?(coder: NSCoder) {
@@ -48,16 +58,26 @@ class LandingView: UIView {
     }
     
     @IBAction func onClickLeftTopButton(_ sender: Any) {
+        self.viewStatesHandler.onNext(.leftUpClick)
     }
     
     @IBAction func onClickRightTopButton(_ sender: Any) {
+        self.viewStatesHandler.onNext(.rightUpClick)
     }
     
     @IBAction func onClickLeftDownButton(_ sender: Any) {
+        self.viewStatesHandler.onNext(.leftDownClick)
     }
     
     @IBAction func onCLickRightDownButton(_ sender: Any) {
+        self.viewStatesHandler.onNext(.rightDownClick)
     }
     
+    // MARK: -
+    // MARK: Overriden
     
+    override func awakeFromNib() {
+        self.square.frame = self.rect
+        self.square.backgroundColor = UIColor.cyan
+    }
 }

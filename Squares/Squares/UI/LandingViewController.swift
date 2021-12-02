@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 protocol RootViewGettable {
     
@@ -49,6 +51,7 @@ class LandingViewController: UIViewController, RootViewGettable {
     
     var rootView: LandingView?
     
+    private var disposeBag = DisposeBag()
     private var currentPosition: CGPoint
     
     // MARK: -
@@ -99,19 +102,29 @@ class LandingViewController: UIViewController, RootViewGettable {
     
     // MARK: -
     // MARK: Private
-    
-//    private func point(to position: Positions, squareSide: CGFloat) -> CGPoint {
-//        switch position {
-//        case .leftUp:
-//            return CGPoint(x: 0, y: 0)
-//        case .rightUp:
-//            return CGPoint(x: Default.screenSize.width - squareSide, y: 0)
-//        case .leftBottom:
-//            return CGPoint(x: 0, y: Default.screenSize.height - squareSide)
-//        case .rightBottom:
-//            return CGPoint(x: Default.screenSize.width - squareSide, y: Default.screenSize.height - squareSide)
-//        }
-//    }
+
+    private func prepareObservingView() {
+        guard let rootView = rootView else {
+            return
+        }
+        
+        rootView.viewStatesHandler.bind { viewStates in
+            let position: CGPoint
+            
+            switch viewStates {
+            case .leftUpClick:
+                position = self.positions.leftUp
+            case .rightUpClick:
+                position = self.positions.rightUp
+            case .leftDownClick:
+                position = self.positions.leftBottom
+            case .rightDownClick:
+                position = self.positions.rightBottom
+            }
+            
+            self.set(squarePosition: position, animated: true)
+        }.disposed(by: self.disposeBag)
+    }
     
     // MARK: -
     // MARK: Overriden
@@ -120,5 +133,7 @@ class LandingViewController: UIViewController, RootViewGettable {
         super.viewDidLoad()
         
         self.rootView = LandingView(rect: CGRect(origin: self.positions.leftUp, size: CGSize(width: Default.squareSide, height: Default.squareSide)))
+        
+        self.prepareObservingView()
     }
 }
