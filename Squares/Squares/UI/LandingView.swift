@@ -10,11 +10,11 @@ import UIKit
 class LandingView: UIView {
 
     @IBOutlet weak var square: UIView!
-    
+
     // MARK: -
     // MARK: Variables
     
-    private(set) var squarePosition: Positions = Positions.leftUp
+    //private(set) var squarePosition: Positions = Positions.leftUp
     
     // MARK: -
     // MARK: Initialization
@@ -35,19 +35,29 @@ class LandingView: UIView {
     
     public func moveSquare(to point: CGPoint, animated: Bool, completion: (() -> ())?) {
         if animated {
-            LandingView.animate(withDuration: 0.5, animations: {
-                switch self.squarePosition {
-                case .leftUp:
-                    self.square.leftAnchor.c
-                case .rightUp:
-                    <#code#>
-                case .leftBottom:
-                    <#code#>
-                case .rightBottom:
-                    <#code#>
-                }
-            })
+            LandingView.animate(withDuration: 0.5) {
+                self.square.layer.position = point
+            } completion: { _ in
+                completion?()
+            }
+
+        } else {
+            self.square.layer.position = point
+            completion?()
         }
     }
-
+    
+    @IBAction func onClickLeftTopButton(_ sender: Any) {
+    }
+    
+    @IBAction func onClickRightTopButton(_ sender: Any) {
+    }
+    
+    @IBAction func onClickLeftDownButton(_ sender: Any) {
+    }
+    
+    @IBAction func onCLickRightDownButton(_ sender: Any) {
+    }
+    
+    
 }
