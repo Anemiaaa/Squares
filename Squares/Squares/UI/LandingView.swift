@@ -24,27 +24,9 @@ class LandingView: UIView {
     // MARK: Variables
     
     public var viewStatesHandler = PublishSubject<States>()
-    
-    private var position: Positions
-    private var size: CGSize
 
-    // MARK: -
-    // MARK: Initialization
-    
-    public init(position: Positions, size: CGSize) {
-        self.position = position
-        self.size = size
-        
-        super.init(frame: UIScreen.main.bounds)
-    }
-    
-    required init?(coder: NSCoder) {
-        self.position = .leftUp
-        self.size = CGSize(width: 100, height: 100)
-        
-        super.init(coder: coder)
-    }
-    
+    private var size = CGSize(width: 100, height: 100)
+ 
     // MARK: -
     // MARK: Public
     
@@ -96,7 +78,7 @@ class LandingView: UIView {
     
     override func awakeFromNib() {
         self.square.frame = CGRect(
-            origin: self.origin(from: self.position),
+            origin: self.origin(from: .leftUp),
             size: self.size
         )
         self.square.backgroundColor = UIColor.cyan

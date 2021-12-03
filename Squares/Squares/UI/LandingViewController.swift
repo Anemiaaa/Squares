@@ -115,9 +115,6 @@ class LandingViewController: UIViewController, RootViewGettable {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let size = CGSize(width: Default.squareSide, height: Default.squareSide)
-        self.rootView = LandingView(position: .leftUp, size: size)
-        
         self.prepareObservingView()
     }
 }
