@@ -25,36 +25,81 @@ class LandingView: UIView {
     
     public var viewStatesHandler = PublishSubject<States>()
     
-    private let rect: CGRect
-    
+    private var position: Positions
+    private var size: CGSize
+
     // MARK: -
     // MARK: Initialization
     
-    public init(rect: CGRect) {
-        self.rect = rect
+    public init(position: Positions, size: CGSize) {
+        self.position = position
+        self.size = size
         
         super.init(frame: UIScreen.main.bounds)
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        self.position = .leftUp
+        self.size = CGSize(width: 100, height: 100)
+        
+        super.init(coder: coder)
     }
     
     // MARK: -
     // MARK: Public
     
-    public func moveSquare(to point: CGPoint, animated: Bool, completion: (() -> ())?) {
+    public func moveSquare(to position: Positions, animated: Bool, completion: (() -> ())?) {
+        let point = self.origin(from: position)
+        
         if animated {
             LandingView.animate(withDuration: 0.5) {
-                self.square.layer.position = point
+                self.square.frame.origin = point
             } completion: { _ in
                 completion?()
             }
 
         } else {
-            self.square.layer.position = point
+            self.square.frame.origin = point
             completion?()
         }
+    }
+        
+    // MARK: -
+    // MARK: Private
+    
+    private func origin(from position: Positions) -> CGPoint {
+        let bound = self.bounds
+        let point: CGPoint
+        let size = self.size
+        
+        switch position {
+        case .leftUp:
+            point = CGPoint(x: bound.minX, y: bound.minY)
+        case .rightUp:
+            point = CGPoint(x: bound.maxX - size.width, y: bound.minY)
+        case .leftBottom:
+            point = CGPoint(x: bound.minX, y: bound.maxY - size.height)
+        case .rightBottom:
+            point = CGPoint(x: bound.maxX - size.width, y: bound.maxY - size.height)
+        case .center:
+            point = CGPoint(
+                x: (bound.maxX / 2) - (size.width / 2),
+                y: (bound.maxY / 2) - (size.height / 2)
+            )
+        }
+        return point
+    }
+
+    
+    // MARK: -
+    // MARK: Overriden
+    
+    override func awakeFromNib() {
+        self.square.frame = CGRect(
+            origin: self.origin(from: self.position),
+            size: self.size
+        )
+        self.square.backgroundColor = UIColor.cyan
     }
     
     @IBAction func onClickLeftTopButton(_ sender: Any) {
@@ -71,13 +116,5 @@ class LandingView: UIView {
     
     @IBAction func onCLickRightDownButton(_ sender: Any) {
         self.viewStatesHandler.onNext(.rightDownClick)
-    }
-    
-    // MARK: -
-    // MARK: Overriden
-    
-    override func awakeFromNib() {
-        self.square.frame = self.rect
-        self.square.backgroundColor = UIColor.cyan
     }
 }

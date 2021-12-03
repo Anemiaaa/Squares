@@ -7,30 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		044FA8292759122E006F9063 /* RootViewGettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044FA8282759122E006F9063 /* RootViewGettable.swift */; };
 		0466B1B62758DF5700C4EFB5 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 0466B1B52758DF5700C4EFB5 /* Podfile */; };
 		0470474D2754FDB00041CFB0 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0470474B2754FDB00041CFB0 /* LandingViewController.swift */; };
 		0470474E2754FDB00041CFB0 /* LandingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0470474C2754FDB00041CFB0 /* LandingViewController.xib */; };
 		04704750275507470041CFB0 /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0470474F275507470041CFB0 /* LandingView.swift */; };
-		0470475227552C650041CFB0 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0470475127552C650041CFB0 /* Extensions.swift */; };
 		0494AACF275039780077A0F8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0494AACE275039780077A0F8 /* AppDelegate.swift */; };
-		0494AAD1275039780077A0F8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0494AAD0275039780077A0F8 /* SceneDelegate.swift */; };
 		0494AAD82750397B0077A0F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0494AAD72750397B0077A0F8 /* Assets.xcassets */; };
-		0494AADB2750397B0077A0F8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0494AAD92750397B0077A0F8 /* LaunchScreen.storyboard */; };
+		0496354A275A451200B5D954 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04963549275A451200B5D954 /* LaunchScreen.storyboard */; };
 		BFCE1220983797D8C396AEFA /* Pods_Squares.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77954B33A423891A80E25B8A /* Pods_Squares.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		044FA8282759122E006F9063 /* RootViewGettable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewGettable.swift; sourceTree = "<group>"; };
 		0466B1B52758DF5700C4EFB5 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		0470474B2754FDB00041CFB0 /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
 		0470474C2754FDB00041CFB0 /* LandingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LandingViewController.xib; sourceTree = "<group>"; };
 		0470474F275507470041CFB0 /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
-		0470475127552C650041CFB0 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		0494AACB275039780077A0F8 /* Squares.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Squares.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0494AACE275039780077A0F8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0494AAD0275039780077A0F8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		0494AAD72750397B0077A0F8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		0494AADA2750397B0077A0F8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0494AADC2750397B0077A0F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04963549275A451200B5D954 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		39BDD90D38C5A558A0F46A57 /* Pods-Squares.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Squares.release.xcconfig"; path = "Target Support Files/Pods-Squares/Pods-Squares.release.xcconfig"; sourceTree = "<group>"; };
 		3AB809AA392267837FAB3918 /* Pods-Squares.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Squares.debug.xcconfig"; path = "Target Support Files/Pods-Squares/Pods-Squares.debug.xcconfig"; sourceTree = "<group>"; };
 		77954B33A423891A80E25B8A /* Pods_Squares.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Squares.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -56,12 +54,12 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		047047442754F29C0041CFB0 /* View */ = {
+		044FA827275911F4006F9063 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				0494AAD92750397B0077A0F8 /* LaunchScreen.storyboard */,
+				044FA8282759122E006F9063 /* RootViewGettable.swift */,
 			);
-			path = View;
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		0470474A2754FD980041CFB0 /* UI */ = {
@@ -78,7 +76,6 @@
 			isa = PBXGroup;
 			children = (
 				0466B1B52758DF5700C4EFB5 /* Podfile */,
-				0494AAE227503A2C0077A0F8 /* Resources */,
 				0494AACD275039780077A0F8 /* Squares */,
 				0494AACC275039780077A0F8 /* Products */,
 				216DD5D636E8645A00B88854 /* Pods */,
@@ -97,11 +94,11 @@
 		0494AACD275039780077A0F8 /* Squares */ = {
 			isa = PBXGroup;
 			children = (
+				0494AAE227503A2C0077A0F8 /* Resources */,
+				044FA827275911F4006F9063 /* Protocols */,
 				0470474A2754FD980041CFB0 /* UI */,
-				047047442754F29C0041CFB0 /* View */,
 				0494AACE275039780077A0F8 /* AppDelegate.swift */,
-				0494AAD0275039780077A0F8 /* SceneDelegate.swift */,
-				0470475127552C650041CFB0 /* Extensions.swift */,
+				04963549275A451200B5D954 /* LaunchScreen.storyboard */,
 			);
 			path = Squares;
 			sourceTree = "<group>";
@@ -121,7 +118,6 @@
 				3AB809AA392267837FAB3918 /* Pods-Squares.debug.xcconfig */,
 				39BDD90D38C5A558A0F46A57 /* Pods-Squares.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -186,7 +182,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0470474E2754FDB00041CFB0 /* LandingViewController.xib in Resources */,
-				0494AADB2750397B0077A0F8 /* LaunchScreen.storyboard in Resources */,
+				0496354A275A451200B5D954 /* LaunchScreen.storyboard in Resources */,
 				0466B1B62758DF5700C4EFB5 /* Podfile in Resources */,
 				0494AAD82750397B0077A0F8 /* Assets.xcassets in Resources */,
 			);
@@ -241,26 +237,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0470475227552C650041CFB0 /* Extensions.swift in Sources */,
 				04704750275507470041CFB0 /* LandingView.swift in Sources */,
+				044FA8292759122E006F9063 /* RootViewGettable.swift in Sources */,
 				0494AACF275039780077A0F8 /* AppDelegate.swift in Sources */,
 				0470474D2754FDB00041CFB0 /* LandingViewController.swift in Sources */,
-				0494AAD1275039780077A0F8 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		0494AAD92750397B0077A0F8 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0494AADA2750397B0077A0F8 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		0494AADD2750397B0077A0F8 /* Debug */ = {
@@ -388,7 +372,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Resources/Info.plist;
+				INFOPLIST_FILE = Squares/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -416,7 +400,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Resources/Info.plist;
+				INFOPLIST_FILE = Squares/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";

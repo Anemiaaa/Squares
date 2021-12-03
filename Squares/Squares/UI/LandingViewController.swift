@@ -9,26 +9,13 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-protocol RootViewGettable {
+public enum Positions {
     
-    associatedtype View: UIView
-    
-    var rootView: View? { get }
-}
-
-extension RootViewGettable where Self: UIViewController {
-    
-    var rootView: View? {
-        return self.view as? View
-    }
-}
-
-public struct Positions {
-    
-    let leftUp: CGPoint
-    let rightUp: CGPoint
-    let leftBottom: CGPoint
-    let rightBottom: CGPoint
+    case leftUp
+    case rightUp
+    case leftBottom
+    case rightBottom
+    case center
 }
 
 class LandingViewController: UIViewController, RootViewGettable {
@@ -44,28 +31,23 @@ class LandingViewController: UIViewController, RootViewGettable {
     struct Default {
         
         static let screenSize = UIScreen.main.bounds
-        static let squareSide = screenSize.width / 4
+        static let squareSide = 100
     }
     
-    public var positions: Positions
+    //public var positions: Positions
     
     var rootView: LandingView?
     
     private var disposeBag = DisposeBag()
-    private var currentPosition: CGPoint
+    private var currentPosition: Positions
     
     // MARK: -
     // MARK: Initialization
     
     init() {
-        self.positions = Positions(leftUp: CGPoint(x: 0, y: 0),
-                                   rightUp: CGPoint(x: Default.screenSize.width - Default.squareSide, y: 0),
-                                   leftBottom: CGPoint(x: 0, y: Default.screenSize.height - Default.squareSide),
-                                   rightBottom: CGPoint(x: Default.screenSize.width - Default.squareSide, y: Default.screenSize.height - Default.squareSide))
+        self.currentPosition = .leftUp
         
-        self.currentPosition = self.positions.leftUp
-        
-        super.init(nibName: String(describing: type(of: self)), bundle: nil)
+        super.init(nibName: nil, bundle: nil)
         
     }
     
@@ -76,19 +58,19 @@ class LandingViewController: UIViewController, RootViewGettable {
     // MARK: -
     // MARK: Public
     
-    public func set(squarePosition: CGPoint) {
+    public func set(squarePosition: Positions) {
         self.rootView?.moveSquare(to: squarePosition, animated: false, completion: { [weak self] in
             self?.currentPosition = squarePosition
         })
     }
     
-    public func set(squarePosition: CGPoint, animated: Bool) {
+    public func set(squarePosition: Positions, animated: Bool) {
         self.rootView?.moveSquare(to: squarePosition, animated: animated, completion: { [weak self] in
             self?.currentPosition = squarePosition
         })
     }
     
-    public func set(squarePosition: CGPoint, animated: Bool, completion: @escaping () -> ()) {
+    public func set(squarePosition: Positions, animated: Bool, completion: @escaping () -> ()) {
         self.rootView?.moveSquare(to: squarePosition, animated: animated, completion: { [weak self] in
             self?.currentPosition = squarePosition
             
@@ -109,21 +91,22 @@ class LandingViewController: UIViewController, RootViewGettable {
         }
         
         rootView.viewStatesHandler.bind { viewStates in
-            let position: CGPoint
+            let position: Positions
             
             switch viewStates {
             case .leftUpClick:
-                position = self.positions.leftUp
+                position = .leftUp
             case .rightUpClick:
-                position = self.positions.rightUp
+                position = .rightUp
             case .leftDownClick:
-                position = self.positions.leftBottom
+                position = .leftBottom
             case .rightDownClick:
-                position = self.positions.rightBottom
+                position = .rightBottom
             }
             
             self.set(squarePosition: position, animated: true)
-        }.disposed(by: self.disposeBag)
+        }
+        .disposed(by: self.disposeBag)
     }
     
     // MARK: -
@@ -132,7 +115,8 @@ class LandingViewController: UIViewController, RootViewGettable {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.rootView = LandingView(rect: CGRect(origin: self.positions.leftUp, size: CGSize(width: Default.squareSide, height: Default.squareSide)))
+        let size = CGSize(width: Default.squareSide, height: Default.squareSide)
+        self.rootView = LandingView(position: .leftUp, size: size)
         
         self.prepareObservingView()
     }
