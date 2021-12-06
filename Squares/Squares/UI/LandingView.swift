@@ -65,8 +65,8 @@ class LandingView: UIView {
             point = CGPoint(x: bound.maxX - size.width, y: bound.maxY - size.height)
         case .center:
             point = CGPoint(
-                x: (bound.maxX / 2) - (size.width / 2),
-                y: (bound.maxY / 2) - (size.height / 2)
+                x: self.center.x - size.width / 2,
+                y: self.center.y - size.height / 2
             )
         }
         return point
@@ -78,10 +78,10 @@ class LandingView: UIView {
     
     override func awakeFromNib() {
         self.square.frame = CGRect(
-            origin: self.origin(from: .leftUp),
+            origin: self.origin(from: .center),
             size: self.size
         )
-        self.square.backgroundColor = UIColor.cyan
+        self.square.backgroundColor = UIColor.lightGray
     }
     
     @IBAction func onClickLeftTopButton(_ sender: Any) {

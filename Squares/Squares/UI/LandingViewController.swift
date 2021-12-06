@@ -36,8 +36,6 @@ class LandingViewController: UIViewController, RootViewGettable {
     
     //public var positions: Positions
     
-    var rootView: LandingView?
-    
     private var disposeBag = DisposeBag()
     private var currentPosition: Positions
     
@@ -76,10 +74,6 @@ class LandingViewController: UIViewController, RootViewGettable {
             
             completion()
         })
-    }
-    
-    public func viewInstance() -> View? {
-        return self.rootView
     }
     
     // MARK: -
