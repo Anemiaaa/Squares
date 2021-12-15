@@ -43,7 +43,7 @@ class LandingViewController: UIViewController, RootViewGettable {
     // MARK: Initialization
     
     init() {
-        self.currentPosition = .leftUp
+        self.currentPosition = .center
         
         super.init(nibName: nil, bundle: nil)
         
@@ -110,5 +110,6 @@ class LandingViewController: UIViewController, RootViewGettable {
         super.viewDidLoad()
         
         self.prepareObservingView()
+        self.rootView?.layoutIfNeeded();
     }
 }

@@ -24,9 +24,7 @@ class LandingView: UIView {
     // MARK: Variables
     
     public var viewStatesHandler = PublishSubject<States>()
-
-    private var size = CGSize(width: 100, height: 100)
- 
+    
     // MARK: -
     // MARK: Public
     
@@ -52,7 +50,7 @@ class LandingView: UIView {
     private func origin(from position: Positions) -> CGPoint {
         let bound = self.bounds
         let point: CGPoint
-        let size = self.size
+        let size = self.square.bounds.size
         
         switch position {
         case .leftUp:
@@ -71,17 +69,12 @@ class LandingView: UIView {
         }
         return point
     }
-
     
     // MARK: -
     // MARK: Overriden
     
     override func awakeFromNib() {
-        self.square.frame = CGRect(
-            origin: self.origin(from: .center),
-            size: self.size
-        )
-        self.square.backgroundColor = UIColor.lightGray
+        self.square.backgroundColor = .cyan
     }
     
     @IBAction func onClickLeftTopButton(_ sender: Any) {

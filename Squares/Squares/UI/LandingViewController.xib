@@ -53,10 +53,13 @@
                                 <action selector="onCLickRightDownButton:" destination="i5M-Pr-FkT" eventType="touchUpInside" id="Gza-DW-W9V"/>
                             </connections>
                         </button>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Hf-AF-TWk">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Hf-AF-TWk">
                             <rect key="frame" x="157" y="398" width="100" height="100"/>
-                            <autoresizingMask key="autoresizingMask"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="100" id="ZAG-Sy-l9U"/>
+                                <constraint firstAttribute="width" constant="100" id="cL3-XV-TXa"/>
+                            </constraints>
                         </view>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -65,10 +68,12 @@
                         <constraint firstItem="faS-pj-Nor" firstAttribute="leading" secondItem="DDQ-WA-6DW" secondAttribute="leading" id="4VN-Ji-Vc5"/>
                         <constraint firstItem="DDQ-WA-6DW" firstAttribute="leading" secondItem="K23-So-xnP" secondAttribute="leading" constant="18" id="7rC-BV-bic"/>
                         <constraint firstItem="DDQ-WA-6DW" firstAttribute="top" secondItem="K23-So-xnP" secondAttribute="top" constant="52" id="Bbg-CC-Eq4"/>
+                        <constraint firstItem="2Hf-AF-TWk" firstAttribute="centerY" secondItem="K23-So-xnP" secondAttribute="centerY" id="F34-3L-vud"/>
                         <constraint firstAttribute="trailing" secondItem="4ca-3C-o1z" secondAttribute="trailing" constant="18" id="Nla-MK-LAz"/>
                         <constraint firstAttribute="bottom" secondItem="faS-pj-Nor" secondAttribute="bottom" constant="52" id="TMS-7I-LBe"/>
                         <constraint firstItem="mcb-nc-DBp" firstAttribute="centerY" secondItem="faS-pj-Nor" secondAttribute="centerY" id="TcK-V9-KI5"/>
                         <constraint firstItem="4ca-3C-o1z" firstAttribute="centerY" secondItem="DDQ-WA-6DW" secondAttribute="centerY" id="cGT-fG-hsh"/>
+                        <constraint firstItem="2Hf-AF-TWk" firstAttribute="centerX" secondItem="K23-So-xnP" secondAttribute="centerX" id="hdr-j7-eFj"/>
                     </constraints>
                 </view>
             </subviews>
