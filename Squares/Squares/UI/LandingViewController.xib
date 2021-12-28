@@ -21,69 +21,39 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K23-So-xnP">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="faS-pj-Nor">
-                            <rect key="frame" x="18" y="813" width="82" height="31"/>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="filled" title="leftDown"/>
-                            <connections>
-                                <action selector="onClickLeftDownButton:" destination="i5M-Pr-FkT" eventType="touchUpInside" id="qTy-Iz-MEo"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DDQ-WA-6DW">
-                            <rect key="frame" x="18" y="52" width="69" height="31"/>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="filled" title="leftTop"/>
-                            <connections>
-                                <action selector="onClickLeftTopButton:" destination="i5M-Pr-FkT" eventType="touchUpInside" id="3Wx-iq-gxk"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ca-3C-o1z">
-                            <rect key="frame" x="318" y="52" width="78" height="31"/>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="filled" title="rightTop"/>
-                            <connections>
-                                <action selector="onClickRightTopButton:" destination="i5M-Pr-FkT" eventType="touchUpInside" id="Q0Z-47-T62"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mcb-nc-DBp">
-                            <rect key="frame" x="305" y="813" width="91" height="31"/>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="filled" title="rightDown"/>
-                            <connections>
-                                <action selector="onCLickRightDownButton:" destination="i5M-Pr-FkT" eventType="touchUpInside" id="Gza-DW-W9V"/>
-                            </connections>
-                        </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Hf-AF-TWk">
-                            <rect key="frame" x="157" y="398" width="100" height="100"/>
+                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="100" id="ZAG-Sy-l9U"/>
-                                <constraint firstAttribute="width" constant="100" id="cL3-XV-TXa"/>
+                                <constraint firstAttribute="height" constant="100" id="dfO-XC-aKE"/>
+                                <constraint firstAttribute="width" constant="100" id="fE6-L9-p8o"/>
                             </constraints>
                         </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DDQ-WA-6DW">
+                            <rect key="frame" x="180" y="437.5" width="54" height="31"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="filled" title="Next"/>
+                            <connections>
+                                <action selector="onClickNextButton:" destination="i5M-Pr-FkT" eventType="touchUpInside" id="2oQ-j3-fAf"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
-                        <constraint firstItem="mcb-nc-DBp" firstAttribute="trailing" secondItem="4ca-3C-o1z" secondAttribute="trailing" id="2Mt-25-obD"/>
-                        <constraint firstItem="faS-pj-Nor" firstAttribute="leading" secondItem="DDQ-WA-6DW" secondAttribute="leading" id="4VN-Ji-Vc5"/>
-                        <constraint firstItem="DDQ-WA-6DW" firstAttribute="leading" secondItem="K23-So-xnP" secondAttribute="leading" constant="18" id="7rC-BV-bic"/>
-                        <constraint firstItem="DDQ-WA-6DW" firstAttribute="top" secondItem="K23-So-xnP" secondAttribute="top" constant="52" id="Bbg-CC-Eq4"/>
-                        <constraint firstItem="2Hf-AF-TWk" firstAttribute="centerY" secondItem="K23-So-xnP" secondAttribute="centerY" id="F34-3L-vud"/>
-                        <constraint firstAttribute="trailing" secondItem="4ca-3C-o1z" secondAttribute="trailing" constant="18" id="Nla-MK-LAz"/>
-                        <constraint firstAttribute="bottom" secondItem="faS-pj-Nor" secondAttribute="bottom" constant="52" id="TMS-7I-LBe"/>
-                        <constraint firstItem="mcb-nc-DBp" firstAttribute="centerY" secondItem="faS-pj-Nor" secondAttribute="centerY" id="TcK-V9-KI5"/>
-                        <constraint firstItem="4ca-3C-o1z" firstAttribute="centerY" secondItem="DDQ-WA-6DW" secondAttribute="centerY" id="cGT-fG-hsh"/>
-                        <constraint firstItem="2Hf-AF-TWk" firstAttribute="centerX" secondItem="K23-So-xnP" secondAttribute="centerX" id="hdr-j7-eFj"/>
+                        <constraint firstItem="2Hf-AF-TWk" firstAttribute="top" secondItem="K23-So-xnP" secondAttribute="top" id="VNb-zT-jtt"/>
+                        <constraint firstItem="2Hf-AF-TWk" firstAttribute="leading" secondItem="K23-So-xnP" secondAttribute="leading" id="oxj-jc-zwb"/>
                     </constraints>
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="K23-So-xnP" secondAttribute="bottom" id="5Xm-CO-Ffg"/>
-                <constraint firstItem="K23-So-xnP" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="C4w-sT-bPv"/>
-                <constraint firstItem="K23-So-xnP" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="crL-FW-BT5"/>
-                <constraint firstItem="K23-So-xnP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="xn9-yB-AsW"/>
+                <constraint firstItem="K23-So-xnP" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="CJW-ld-BHZ"/>
+                <constraint firstAttribute="bottom" secondItem="K23-So-xnP" secondAttribute="bottom" id="FMe-WB-B43"/>
+                <constraint firstItem="DDQ-WA-6DW" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="Rfs-oP-47y"/>
+                <constraint firstItem="K23-So-xnP" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="f2P-RM-Kmj"/>
+                <constraint firstItem="K23-So-xnP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="fYk-V6-Lec"/>
+                <constraint firstItem="DDQ-WA-6DW" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="oUk-9o-gC9"/>
             </constraints>
             <connections>
                 <outlet property="square" destination="2Hf-AF-TWk" id="wEP-SM-MYt"/>

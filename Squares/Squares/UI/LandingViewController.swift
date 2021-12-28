@@ -15,7 +15,6 @@ public enum Positions {
     case rightUp
     case leftBottom
     case rightBottom
-    case center
 }
 
 class LandingViewController: UIViewController, RootViewGettable {
@@ -38,12 +37,13 @@ class LandingViewController: UIViewController, RootViewGettable {
     
     private var disposeBag = DisposeBag()
     private var currentPosition: Positions
+    private var workItem: DispatchWorkItem?
     
     // MARK: -
     // MARK: Initialization
     
     init() {
-        self.currentPosition = .center
+        self.currentPosition = .leftUp
         
         super.init(nibName: nil, bundle: nil)
         
@@ -80,27 +80,44 @@ class LandingViewController: UIViewController, RootViewGettable {
     // MARK: Private
 
     private func prepareObservingView() {
-        guard let rootView = rootView else {
+        guard let rootView = self.rootView else {
             return
         }
         
         rootView.viewStatesHandler.bind { viewStates in
-            let position: Positions
-            
-            switch viewStates {
-            case .leftUpClick:
-                position = .leftUp
-            case .rightUpClick:
-                position = .rightUp
-            case .leftDownClick:
-                position = .leftBottom
-            case .rightDownClick:
-                position = .rightBottom
+            if let workItem = self.workItem, !workItem.isCancelled {
+                workItem.cancel()
+                self.workItem = nil
             }
             
-            self.set(squarePosition: position, animated: true)
+            self.workItem = DispatchWorkItem {
+                let position: Positions
+                
+                switch viewStates {
+                case .nextClick:
+                    position = self.switchPosition(position: self.currentPosition)
+                }
+                
+    //            currentPosition = rootView.square.frame.origin != rootView.origin(from: self.currentPosition) ? self.switchPosition(position: position) : position
+                
+                self.set(squarePosition: position, animated: true)
+            }
+            DispatchQueue.main.async(execute: self.workItem!)
         }
         .disposed(by: self.disposeBag)
+    }
+    
+    private func switchPosition(position: Positions) -> Positions {
+        switch self.currentPosition {
+        case .leftUp:
+            return .rightUp
+        case .rightUp:
+            return .rightBottom
+        case .leftBottom:
+            return .leftUp
+        case .rightBottom:
+            return .leftBottom
+        }
     }
     
     // MARK: -
