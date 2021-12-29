@@ -37,6 +37,7 @@ class LandingViewController: UIViewController, RootViewGettable {
     
     private var disposeBag = DisposeBag()
     private var currentPosition: Positions
+    private var destinationPosition: Positions?
     private var workItem: DispatchWorkItem?
     
     // MARK: -
@@ -85,22 +86,26 @@ class LandingViewController: UIViewController, RootViewGettable {
         }
         
         rootView.viewStatesHandler.bind { viewStates in
-            if let workItem = self.workItem, !workItem.isCancelled {
+            if let workItem = self.workItem, let destinationPosition = self.destinationPosition {
                 workItem.cancel()
                 self.workItem = nil
-            }
-            
-            self.workItem = DispatchWorkItem {
-                let position: Positions
                 
+                self.destinationPosition = self.switchPosition(position: destinationPosition)
+            } else {
                 switch viewStates {
                 case .nextClick:
-                    position = self.switchPosition(position: self.currentPosition)
+                    self.destinationPosition = self.switchPosition(position: self.currentPosition)
                 }
-                
-    //            currentPosition = rootView.square.frame.origin != rootView.origin(from: self.currentPosition) ? self.switchPosition(position: position) : position
-                
-                self.set(squarePosition: position, animated: true)
+            }
+            
+            self.workItem = DispatchWorkItem { [weak self] in
+                guard let self = self, let destinationPosition = self.destinationPosition else {
+                    return
+                }
+
+                self.set(squarePosition: destinationPosition, animated: true) {
+                    self.workItem = nil
+                }
             }
             DispatchQueue.main.async(execute: self.workItem!)
         }
@@ -108,7 +113,7 @@ class LandingViewController: UIViewController, RootViewGettable {
     }
     
     private func switchPosition(position: Positions) -> Positions {
-        switch self.currentPosition {
+        switch position {
         case .leftUp:
             return .rightUp
         case .rightUp:
