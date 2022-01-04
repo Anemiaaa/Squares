@@ -18,6 +18,6 @@ protocol RootViewGettable {
 extension RootViewGettable where Self: UIViewController {
     
     var rootView: View? {
-        return self.view as? View
+        return self.viewIfLoaded as? View
     }
 }

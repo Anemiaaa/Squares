@@ -27,92 +27,52 @@ class LandingViewController: UIViewController, RootViewGettable {
     // MARK: -
     // MARK: Variables
     
-    struct Default {
-        
-        static let screenSize = UIScreen.main.bounds
-        static let squareSide = 100
-    }
-    
-    //public var positions: Positions
-    
     private var disposeBag = DisposeBag()
-    private var currentPosition: Positions
+    private var currentPosition: Positions = .leftUp
     private var destinationPosition: Positions?
     private var workItem: DispatchWorkItem?
-    
-    // MARK: -
-    // MARK: Initialization
-    
-    init() {
-        self.currentPosition = .leftUp
-        
-        super.init(nibName: nil, bundle: nil)
-        
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+
     // MARK: -
     // MARK: Public
     
-    public func set(squarePosition: Positions) {
-        self.rootView?.moveSquare(to: squarePosition, animated: false, completion: { [weak self] in
-            self?.currentPosition = squarePosition
-        })
-    }
-    
-    public func set(squarePosition: Positions, animated: Bool) {
-        self.rootView?.moveSquare(to: squarePosition, animated: animated, completion: { [weak self] in
-            self?.currentPosition = squarePosition
-        })
-    }
-    
-    public func set(squarePosition: Positions, animated: Bool, completion: @escaping () -> ()) {
-        self.rootView?.moveSquare(to: squarePosition, animated: animated, completion: { [weak self] in
+    public func set(squarePosition: Positions, animated: Bool = false, completion: F.VoidFunc? = nil) {
+        self.rootView?.moveSquare(to: squarePosition, animated: animated) { [weak self] in
             self?.currentPosition = squarePosition
             
-            completion()
-        })
+            completion?()
+        }
     }
     
     // MARK: -
     // MARK: Private
 
     private func prepareObservingView() {
-        guard let rootView = self.rootView else {
-            return
-        }
-        
-        rootView.viewStatesHandler.bind { viewStates in
-            if let workItem = self.workItem, let destinationPosition = self.destinationPosition {
-                workItem.cancel()
-                self.workItem = nil
-                
-                self.destinationPosition = self.switchPosition(position: destinationPosition)
-            } else {
-                switch viewStates {
-                case .nextClick:
-                    self.destinationPosition = self.switchPosition(position: self.currentPosition)
+        rootView?.viewStatesHandler.bind { [weak self] viewStates in
+            guard let self = self else { return }
+            
+            self.rootView?.nextButton?.isEnabled = false
+            
+            let next = self.workItem == nil
+                ? self.nextPosition(by: self.currentPosition)
+                : self.destinationPosition.map(self.nextPosition)
+            
+            guard let destination = next else { return }
+            self.destinationPosition = next
+            
+            self.workItem?.cancel()
+            self.workItem = DispatchWorkItem {
+                self.set(squarePosition: destination, animated: true) {
+                    self.workItem = nil
+                    self.rootView?.nextButton?.isEnabled = true
                 }
             }
             
-            self.workItem = DispatchWorkItem { [weak self] in
-                guard let self = self, let destinationPosition = self.destinationPosition else {
-                    return
-                }
-
-                self.set(squarePosition: destinationPosition, animated: true) {
-                    self.workItem = nil
-                }
-            }
-            DispatchQueue.main.async(execute: self.workItem!)
+            self.workItem.map(DispatchQueue.main.async)
         }
         .disposed(by: self.disposeBag)
     }
     
-    private func switchPosition(position: Positions) -> Positions {
+    private func nextPosition(by position: Positions) -> Positions {
         switch position {
         case .leftUp:
             return .rightUp
@@ -132,6 +92,5 @@ class LandingViewController: UIViewController, RootViewGettable {
         super.viewDidLoad()
         
         self.prepareObservingView()
-        self.rootView?.layoutIfNeeded();
     }
 }

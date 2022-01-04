@@ -8,6 +8,11 @@
 import UIKit
 import RxSwift
 
+public enum F {
+   
+    typealias VoidFunc = () -> ()
+}
+
 public enum States {
     
     case nextClick
@@ -15,47 +20,46 @@ public enum States {
 
 class LandingView: UIView {
 
-    @IBOutlet weak var square: UIView!
-
     // MARK: -
     // MARK: Variables
+    
+    @IBOutlet weak var square: UIView?
+    @IBOutlet weak var nextButton: UIButton?
     
     public var viewStatesHandler = PublishSubject<States>()
     
     // MARK: -
     // MARK: Public
     
-    public func moveSquare(to position: Positions, animated: Bool, completion: (() -> ())?) {
+    public func moveSquare(to position: Positions, animated: Bool, completion: F.VoidFunc?) {
         let point = self.origin(from: position)
         
         if animated {
             LandingView.animate(
                 withDuration: 1,
-                animations: { self.square.frame.origin = point },
+                animations: { self.square?.frame.origin = point },
                 completion: { _ in completion?() }
             )
         } else {
-            self.square.frame.origin = point
+            self.square?.frame.origin = point
             completion?()
         }
     }
     
     public func origin(from position: Positions) -> CGPoint {
         let bound = self.bounds
-        let point: CGPoint
-        let size = self.square.bounds.size
+        let size = self.square?.bounds.size ?? .zero
         
         switch position {
         case .leftUp:
-            point = CGPoint(x: bound.minX, y: bound.minY)
+            return CGPoint(x: bound.minX, y: bound.minY)
         case .rightUp:
-            point = CGPoint(x: bound.maxX - size.width, y: bound.minY)
+            return CGPoint(x: bound.maxX - size.width, y: bound.minY)
         case .leftBottom:
-            point = CGPoint(x: bound.minX, y: bound.maxY - size.height)
+            return CGPoint(x: bound.minX, y: bound.maxY - size.height)
         case .rightBottom:
-            point = CGPoint(x: bound.maxX - size.width, y: bound.maxY - size.height)
+            return CGPoint(x: bound.maxX - size.width, y: bound.maxY - size.height)
         }
-        return point
     }
         
     // MARK: -
@@ -63,12 +67,5 @@ class LandingView: UIView {
     
     @IBAction private func onClickNextButton(_ sender: Any) {
         self.viewStatesHandler.onNext(.nextClick)
-    }
-    
-    // MARK: -
-    // MARK: Overriden
-    
-    override func awakeFromNib() {
-        self.square.backgroundColor = .cyan
     }
 }
