@@ -56,8 +56,8 @@
                 <constraint firstItem="DDQ-WA-6DW" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="oUk-9o-gC9"/>
             </constraints>
             <connections>
+                <outlet property="figure" destination="2Hf-AF-TWk" id="wEP-SM-MYt"/>
                 <outlet property="nextButton" destination="DDQ-WA-6DW" id="Cet-Lh-KZk"/>
-                <outlet property="square" destination="2Hf-AF-TWk" id="wEP-SM-MYt"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="99.776785714285708"/>
         </view>
