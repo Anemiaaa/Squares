@@ -36,7 +36,7 @@ class LandingViewController: UIViewController, RootViewGettable {
     // MARK: Public
     
     public func set(squarePosition: Positions, animated: Bool = false, completion: F.VoidFunc? = nil) {
-        self.rootView?.moveSquare(to: squarePosition, animated: animated) { [weak self] in
+        self.rootView?.moveFigure(to: squarePosition, animated: animated) { [weak self] in
             self?.currentPosition = squarePosition
             
             completion?()

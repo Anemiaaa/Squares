@@ -23,26 +23,20 @@ class LandingView: UIView {
     
     public var viewStatesHandler = PublishSubject<States>()
     
+    private struct Corners {
+        
+        let start: CGFloat
+        let end: CGFloat
+    }
+    
     // MARK: -
     // MARK: Public
     
     public func moveFigure(to position: Positions, animated: Bool, completion: F.VoidFunc?) {
-        let startCorner: CGFloat
-        let endCorner: CGFloat
-        let endColor: UIColor
-        let point = self.origin(from: position)
-        
-        if position == .leftUp || position == .rightUp {
-            startCorner = 0
-            endCorner = (self.figure?.bounds.size.width ?? 0) / 2
-            endColor = position == .leftUp ? .systemTeal : .cyan
-        }
-        else {
-            startCorner = (self.figure?.bounds.size.width ?? 0) / 2
-            endCorner = 0
-            endColor = position == .rightBottom ? .green : .blue
-        }
-        
+        let duration = CFTimeInterval(2)
+        let point = self.figureCenter(for: position)
+        let endColor = self.color(for: position)
+        let corners = self.cornerRadius(for: position)
         
         if animated {
             
@@ -50,36 +44,37 @@ class LandingView: UIView {
             
             CATransaction.setAnimationDuration(2)
             CATransaction.setCompletionBlock {
+                self.setFigureConfigVariables(point: point, cornerRadius: corners.end, backgroundColor: endColor)
+                
                 completion?()
             }
 
-            self.switchSquareCircle(from: startCorner, to: endCorner, duration: 2)
-            self.changeColor(to: endColor, duration: 2)
-            self.move(to: point, duration: 2)
+            self.animatedSquareCircleSwitch(from: corners.start, to: corners.end, duration: duration)
+            self.animatedColorChange(to: endColor, duration: duration)
+            self.animatedMove(to: point, duration: duration)
             
             CATransaction.commit()
             
         } else {
-            self.figure?.frame.origin = point
-            self.figure?.layer.cornerRadius = endCorner
+            self.setFigureConfigVariables(point: point, cornerRadius: corners.end, backgroundColor: endColor)
             
             completion?()
         }
     }
     
-    public func origin(from position: Positions) -> CGPoint {
+    public func figureCenter(for position: Positions) -> CGPoint {
         let bound = self.bounds
-        let size = self.figure?.bounds.size ?? .zero
+        let size = self.figure?.bounds ?? .zero
         
         switch position {
         case .leftUp:
-            return CGPoint(x: bound.minX, y: bound.minY)
+            return CGPoint(x: size.width / 2, y: size.height / 2)
         case .rightUp:
-            return CGPoint(x: bound.maxX - size.width, y: bound.minY)
+            return CGPoint(x: bound.maxX - size.width / 2, y: bound.minY + size.height / 2)
         case .leftBottom:
-            return CGPoint(x: bound.minX, y: bound.maxY - size.height)
+            return CGPoint(x: bound.minX + size.width / 2, y: bound.maxY - size.height / 2)
         case .rightBottom:
-            return CGPoint(x: bound.maxX - size.width, y: bound.maxY - size.height)
+            return CGPoint(x: bound.maxX - size.width / 2, y: bound.maxY - size.height / 2)
         }
     }
         
@@ -90,33 +85,67 @@ class LandingView: UIView {
         self.viewStatesHandler.onNext(.nextClick)
     }
     
-    private func switchSquareCircle(from start: CGFloat, to end: CGFloat, duration: CFTimeInterval) {
-        let animation = CABasicAnimation(keyPath: "circle")
+    private func animatedSquareCircleSwitch(from start: CGFloat, to end: CGFloat, duration: CFTimeInterval) {
+        let animation = CABasicAnimation(keyPath: "cornerRadius")
         
         animation.fromValue = start
         animation.toValue = end
         animation.duration = duration
         
-        self.figure?.layer.add(animation, forKey: "circle")
+        self.figure?.layer.add(animation, forKey: "cornerRadius")
     }
     
-    private func changeColor(to color: UIColor, duration: CFTimeInterval) {
-        let animation = CABasicAnimation(keyPath: "color")
+    private func animatedColorChange(to color: CGColor, duration: CFTimeInterval) {
+        let animation = CABasicAnimation(keyPath: "backgroundColor")
         
-        animation.fromValue = self.figure?.backgroundColor
+        animation.fromValue = self.figure?.backgroundColor?.cgColor
         animation.toValue = color
         animation.duration = duration
         
-        self.figure?.layer.add(animation, forKey: "color")
+        self.figure?.layer.add(animation, forKey: "backgroundColor")
     }
     
-    private func move(to point: CGPoint, duration: CFTimeInterval) {
-        let animation = CABasicAnimation(keyPath: "movement")
+    private func animatedMove(to point: CGPoint, duration: CFTimeInterval) {
+        let animation = CABasicAnimation(keyPath: "position")
         
-        animation.fromValue = self.figure?.frame.origin
+        animation.fromValue = self.figure?.center
         animation.toValue = point
         animation.duration = duration
         
-        self.figure?.layer.add(animation, forKey: "movement")
+        self.figure?.layer.add(animation, forKey: "position")
+    }
+    
+    private func setFigureConfigVariables(point: CGPoint, cornerRadius: CGFloat, backgroundColor: CGColor) {
+        self.figure?.center = point
+        self.figure?.backgroundColor = UIColor(cgColor: backgroundColor)
+        self.figure?.layer.cornerRadius = cornerRadius
+    }
+    
+    private func cornerRadius(for position: Positions) -> Corners {
+        let side = self.figure?.bounds.size.width ?? 0
+        
+        switch position {
+        case .leftUp:
+            return Corners(start: 0, end: 0)
+        case .rightUp:
+            return Corners(start: 0, end: side / 2)
+        case .leftBottom:
+            return Corners(start: side / 2, end: 0)
+        case .rightBottom:
+            return Corners(start: side / 2, end: side / 2)
+        }
+    }
+    
+    private func color(for position: Positions) -> CGColor {
+        switch position {
+        case .leftUp:
+            return UIColor.systemTeal.cgColor
+        case .rightUp:
+            return UIColor.cyan.cgColor
+        case .leftBottom:
+            return UIColor.blue.cgColor
+        case .rightBottom:
+            return UIColor.green.cgColor
+        }
     }
 }
