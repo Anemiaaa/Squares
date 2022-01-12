@@ -23,12 +23,6 @@ class LandingView: UIView {
     
     public var viewStatesHandler = PublishSubject<States>()
     
-    private struct Corners {
-        
-        let start: CGFloat
-        let end: CGFloat
-    }
-    
     // MARK: -
     // MARK: Public
     
@@ -36,27 +30,27 @@ class LandingView: UIView {
         let duration = CFTimeInterval(2)
         let point = self.figureCenter(for: position)
         let endColor = self.color(for: position)
-        let corners = self.cornerRadius(for: position)
+        let endCorner = self.cornerRadius(for: position)
         
         if animated {
             
             CATransaction.begin()
             
-            CATransaction.setAnimationDuration(2)
+            CATransaction.setAnimationDuration(duration)
             CATransaction.setCompletionBlock {
-                self.setFigureConfigVariables(point: point, cornerRadius: corners.end, backgroundColor: endColor)
+                self.setFigureConfigVariables(point: point, cornerRadius: endCorner, backgroundColor: endColor)
                 
                 completion?()
             }
 
-            self.animatedSquareCircleSwitch(from: corners.start, to: corners.end, duration: duration)
+            self.animatedSquareCircleSwitch(to: endCorner, duration: duration)
             self.animatedColorChange(to: endColor, duration: duration)
             self.animatedMove(to: point, duration: duration)
             
             CATransaction.commit()
             
         } else {
-            self.setFigureConfigVariables(point: point, cornerRadius: corners.end, backgroundColor: endColor)
+            self.setFigureConfigVariables(point: point, cornerRadius: endCorner, backgroundColor: endColor)
             
             completion?()
         }
@@ -85,10 +79,9 @@ class LandingView: UIView {
         self.viewStatesHandler.onNext(.nextClick)
     }
     
-    private func animatedSquareCircleSwitch(from start: CGFloat, to end: CGFloat, duration: CFTimeInterval) {
+    private func animatedSquareCircleSwitch(to end: CGFloat, duration: CFTimeInterval) {
         let animation = CABasicAnimation(keyPath: "cornerRadius")
         
-        animation.fromValue = start
         animation.toValue = end
         animation.duration = duration
         
@@ -98,7 +91,6 @@ class LandingView: UIView {
     private func animatedColorChange(to color: CGColor, duration: CFTimeInterval) {
         let animation = CABasicAnimation(keyPath: "backgroundColor")
         
-        animation.fromValue = self.figure?.backgroundColor?.cgColor
         animation.toValue = color
         animation.duration = duration
         
@@ -108,9 +100,9 @@ class LandingView: UIView {
     private func animatedMove(to point: CGPoint, duration: CFTimeInterval) {
         let animation = CABasicAnimation(keyPath: "position")
         
-        animation.fromValue = self.figure?.center
         animation.toValue = point
         animation.duration = duration
+        animation.isRemovedOnCompletion = false
         
         self.figure?.layer.add(animation, forKey: "position")
     }
@@ -121,18 +113,18 @@ class LandingView: UIView {
         self.figure?.layer.cornerRadius = cornerRadius
     }
     
-    private func cornerRadius(for position: Positions) -> Corners {
+    private func cornerRadius(for position: Positions) -> CGFloat {
         let side = self.figure?.bounds.size.width ?? 0
         
         switch position {
         case .leftUp:
-            return Corners(start: 0, end: 0)
+            return 0
         case .rightUp:
-            return Corners(start: 0, end: side / 2)
+            return side / 2
         case .leftBottom:
-            return Corners(start: side / 2, end: 0)
+            return 0
         case .rightBottom:
-            return Corners(start: side / 2, end: side / 2)
+            return side / 2
         }
     }
     
